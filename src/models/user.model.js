@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-    name:{
+    fullName:{
         type:String,
         required:true,
         trim:true,
+    },
+    userName:{
+        type:String,
+        required:true,
+        trim:true
     },
     email:{
         type:String,
@@ -15,26 +20,19 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    image:{
+    profileImage:{
         type:String,
-        required:true,
-    },
-    streak:{
-        type:Number,
-        required:true,
-    },
-    rank:{
-        type:Number,
-        required:true,
-    },
-    points:{
-        type:Number,
-        required:true,
     },
     additionalDetails:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
         ref:"Profile"
+    },
+    token:{
+        type:String,
+    },
+    resetPasswordExpires:{
+        type:Date,
     }
 })
 
