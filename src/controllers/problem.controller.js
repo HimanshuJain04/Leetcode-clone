@@ -14,7 +14,10 @@ const problemSchema = z.object({
     companies: z.array(z.string()),
 });
 
+const PAGE_SIZE = 10;
 
+
+// create problem
 export const createProblem = async (req, res) => {
     try {
         // get data from body
@@ -37,7 +40,6 @@ export const createProblem = async (req, res) => {
         const { title, description, questionType, topics, companies } = body;
 
         // create entry in problem db
-
         const createdProblem = await Problem.create(
             {
                 title,
@@ -47,7 +49,6 @@ export const createProblem = async (req, res) => {
                 companies,
             }
         );
-
 
         // return success response
         return res.status(200).json({
@@ -66,3 +67,102 @@ export const createProblem = async (req, res) => {
     }
 }
 
+// get problem details by id
+export const getProblemById = async (req, res) => {
+    try {
+
+        const problemId = req.nextUrl.searchParams.get("problemId");
+
+        if (!problemId) {
+            return res.status(404).json({
+                message: "Problem id not found",
+                success: false,
+                data: null,
+                error: "Problem id not found",
+            });
+        }
+
+        const problemDetail = await Problem.findById(problemId);
+
+        // return success response
+        return res.status(200).json({
+            message: "Get problem by id successfully",
+            success: true,
+            data: problemDetail,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server failed to get problem by id, try again later",
+            success: false,
+            data: null,
+            error: error.message,
+        });
+    }
+}
+
+// get all problems with pagination concept
+export const getAllProblems = async (req, res) => {
+    try {
+
+        const index = req.nextUrl.searchParams.get("index") || 0;
+
+        const problems = await Problem
+            .find()
+            .skip(index * PAGE_SIZE)
+            .limit(PAGE_SIZE);
+
+        // return success response
+        return res.status(200).json({
+            message: "Get problem by id successfully",
+            success: true,
+            data: problems,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server failed to get problem by id, try again later",
+            success: false,
+            data: null,
+            error: error.message,
+        });
+    }
+}
+
+
+// delete problem
+export const deleteProblem = async (req, res) => {
+    try {
+
+        const problemId = req.nextUrl.searchParams.get("problemId");
+
+        if (!problemId) {
+            return res.status(404).json({
+                message: "Problem id not found",
+                success: false,
+                data: null,
+                error: "Problem id not found",
+            });
+        }
+
+        const problemDetail = await Problem.findByIdAndDelete(problemId);
+
+        // return success response
+        return res.status(200).json({
+            message: "Delete problem by id successfully",
+            success: true,
+            data: problemDetail,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server failed to delete problem by id, try again later",
+            success: false,
+            data: null,
+            error: error.message,
+        });
+    }
+}
+
+
+// update problem
