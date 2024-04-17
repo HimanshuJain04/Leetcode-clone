@@ -1,17 +1,31 @@
-import Image from "next/image";
+"use client"
 
-import DbConnect from "@/config/dbConfig";
+import {connect} from "@/config/dbConfig";
+import axios from "axios";
+
 import { useEffect } from "react";
+
+// DbConnect();
+
 
 export default function Home() {
 
 
-  useEffect(()=>{
+  async  function  Call(){
 
-    DbConnect();
 
-    
-  },[]);
+    const data = await axios.get("/api/temp");
+
+    console.log(data.data);
+
+  }
+
+  useEffect(() => {
+
+    Call();
+
+  }, [])
+
 
   return (
 
@@ -22,6 +36,7 @@ export default function Home() {
     </div>
   );
 }
+
 
 
 
