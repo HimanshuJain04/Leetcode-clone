@@ -6,24 +6,16 @@ const problemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    id:{
-        type:Number,
-        required:true
-    },
-    description:{
-        type:String,
-        required:true
+    description: {
+        type: String,
+        required: true
     },
     questionType: {
         type: String,
         enum: ["Easy", "Medium", "Hard"],
         required: true,
     },
-    title:{
-        type:String,
-        required:true
-    },
-    topics:[
+    topics: [
         {
             type: String,
         }
@@ -33,19 +25,19 @@ const problemSchema = new mongoose.Schema({
             type: String,
         }
     ],
-    likes:{
-        type:Number,
-        default:0
+    likes: {
+        type: Number,
+        default: 0
     },
-    dislikes:{
-        type:Number,
-        default:0
+    dislikes: {
+        type: Number,
+        default: 0
     },
-    bookmarks:{
-        type:Number,
-        default:0
+    bookmarks: {
+        type: Number,
+        default: 0
     }
-    
+
 })
 
 module.exports = mongoose.model("Problem", problemSchema);
