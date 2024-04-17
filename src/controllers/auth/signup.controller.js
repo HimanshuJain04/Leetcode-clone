@@ -70,7 +70,18 @@ export const signup = async (req, res) => {
         console.log(uuid);
 
 
-        // 
+        // create entry in databse
+        const user = User.create({
+            fullName,
+            userName,
+            email,
+            password,
+            uuid
+        });
+
+
+        //generate link
+        const link = `http://localhost:3000/${uuid}/${user}`
         
         // hash the password
         const hashedPass = await bcrypt.hash(password, 10);
