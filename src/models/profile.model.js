@@ -24,7 +24,19 @@ const profileSchema = new mongoose.Schema({
         {
             type: String,
         }
-    ]
+    ],
+    streak:{
+        type:Number,
+        default:0
+    },
+    rank:{
+        type:Number,
+        default:0
+    },
+    points:{
+        type:Number,
+        default:0
+    },
 
 })
 
