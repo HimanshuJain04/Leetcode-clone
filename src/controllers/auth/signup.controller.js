@@ -2,7 +2,8 @@ import { z } from 'zod';
 import User from "@/models/user.model";
 import bcrypt from "bcrypt";
 import { generateOTP } from "@/helper/generateOtp";
-import { sendMail } from '@/helper/sendMail';
+const {v4: uuidv4} = require('uuid');
+
 
 const signupSchema = z.object({
     fullName: z.string(),
@@ -63,35 +64,21 @@ export const signup = async (req, res) => {
             });
         }
 
+        
+        //uuid generation
+        const uuid = uuidv4();
+        console.log(uuid);
+
+
+        // 
+        
         // hash the password
         const hashedPass = await bcrypt.hash(password, 10);
 
         // If everything is okay, send OTP or perform further steps
-        const generatedOtp = generateOTP();
 
-        const mailResponse = await sendMail(
-            {
-                sendTo: email,
-                subject: "Verify your email",
-                body: generatedOtp
-            }
-        );
+        const otp = generateOTP();
 
-        console.log("Mail: ", mailResponse);
-
-        const imageUrl = `https://ui-avatars.com/api/?name=${fullName}`;
-
-        // create entry in db
-        const createdUser = await User.create(
-            {
-                userName,
-                fullName,
-                email,
-                password: hashedPass,
-                profileImg: imageUrl,
-                otp: generateOTP,
-            }
-        );
 
         // return success response
         return res.status(200).json({

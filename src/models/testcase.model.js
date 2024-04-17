@@ -1,14 +1,10 @@
 const mongoose = require("mongoose");
 
 const testcaseSchema = new mongoose.Schema({
-    parentId:{
+    questionId:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
         ref:"Problem"
-    },
-    id:{
-        type:Number,
-        required:true
     },
     input:{
         type:String,
@@ -19,3 +15,5 @@ const testcaseSchema = new mongoose.Schema({
         required:true
     }
 })
+
+module.exports = mongoose.model("Testcase" , testcaseSchema);
