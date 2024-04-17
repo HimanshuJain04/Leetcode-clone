@@ -1,17 +1,11 @@
+import { dbConnection } from "@/config/dbConfig";
 
-import {connect} from "@/config/dbConfig";
-
-import { NextRequest,NextResponse } from "next/server";
-
-// import {User} from "@/models/User";
-
-connect();
+dbConnection();
 
 
-export default async function GET(){
+export default async function GET() {
 
-
-    try{
+    try {
 
         console.log("hellow");
 
@@ -21,13 +15,13 @@ export default async function GET(){
         return NextResponse.json({
 
 
-            message:"helow"
+            message: "helow"
 
         })
 
 
 
-    }catch(error){
+    } catch (error) {
 
         console.log(error);
 
