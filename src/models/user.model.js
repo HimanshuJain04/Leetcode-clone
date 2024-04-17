@@ -1,7 +1,17 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-    fullName:{
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+
+    },fullName:{
         type:String,
         required:true,
         trim:true,
@@ -16,9 +26,30 @@ const userSchema = new mongoose.Schema({
         required:true,
         trim:true,
     },
-    password:{
-        type:String,
-        required:true,
+    password: {
+        type: String,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+    streak: {
+        type: Number,
+        required: true,
+    },
+    rank: {
+        type: Number,
+        required: true,
+    },
+    points: {
+        type: Number,
+        required: true,
+    },
+    additionalDetails: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Profile"
     },
     profileImage:{
         type:String,

@@ -2,27 +2,27 @@ const mongoose = require("mongoose")
 
 const profileSchema = new mongoose.Schema({
 
-    college:{
-        type:String,
+    college: {
+        type: String,
     },
-    location:{
-        type:String,
+    location: {
+        type: String,
     },
-    maxStreak:{
-        type:Number,
+    maxStreak: {
+        type: Number,
     },
-    gender:{
-        type:String,
+    gender: {
+        type: String,
     },
-    dateOfBirth:{
-        type:Date,
+    dateOfBirth: {
+        type: Date,
     },
-    about:{
-        type:String,
+    about: {
+        type: String,
     },
-    languages:[
+    languages: [
         {
-            type:String,
+            type: String,
         }
     ],
     streak:{
