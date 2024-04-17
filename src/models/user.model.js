@@ -39,7 +39,13 @@ const userSchema = new mongoose.Schema({
     },
     verifyUUIDExpiry:{
         type:Date,
+    },
+    isverified:{
+        type:Boolean,
+        default:false,
     }
 })
 
 module.exports = mongoose.model("User", userSchema);
+
+

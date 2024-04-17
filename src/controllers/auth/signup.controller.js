@@ -12,6 +12,7 @@ const signupSchema = z.object({
     password: z.string().min(8),
 });
 
+
 export const signup = async (req, res) => {
     try {
         // get data from body
@@ -20,12 +21,12 @@ export const signup = async (req, res) => {
         // Validate request body
         try {
             signupSchema.parse(body);
-        } catch (validationError) {
+        } catch (error) {
             // If validation fails, return error response
             return res.status(400).json({
                 message: "Validation error",
                 success: false,
-                error: validationError.errors,
+                error: error.errors,
                 data: null
             });
         }
@@ -43,10 +44,21 @@ export const signup = async (req, res) => {
             });
         }
 
+        // If email exist  return error response
+        if (!isEmailAlreadyExist(email)) {
+            return res.status(400).json({
+                message: "Email already registered, Please login to continue",
+                error: "Email already registered, Please login to continue",
+                success: false,
+                data: null
+            });
+        }
+
         // If userName is not unique, return error response
-        if (!isUserNameUnique(userName)) {
+        if (!isUserNameAlreadyExist(userName)) {
             return res.status(400).json({
                 message: "Username is already taken",
+                error: "Username is already taken",
                 success: false,
                 data: null
             });
@@ -54,16 +66,25 @@ export const signup = async (req, res) => {
 
         
         //uuid generation
+        const uuid = uuidv4();
+        console.log(uuid);
 
+
+        // 
         
         // hash the password
         const hashedPass = await bcrypt.hash(password, 10);
+
+        // If everything is okay, send OTP or perform further steps
+
+        const otp = generateOTP();
+
 
         // return success response
         return res.status(200).json({
             message: "Signup successfully",
             success: true,
-            data: null,
+            data: createdUser,
         });
 
     } catch (error) {

@@ -2,30 +2,48 @@ const mongoose = require("mongoose");
 
 const problemSchema = new mongoose.Schema({
 
-    title:{
-        type:String,
+    title: {
+        type: String,
+        required: true
+    },
+    id:{
+        type:Number,
         required:true
     },
     description:{
         type:String,
         required:true
     },
-    questionType:{
+    questionType: {
+        type: String,
+        enum: ["Easy", "Medium", "Hard"],
+        required: true,
+    },
+    title:{
         type:String,
-        enum:["Easy", "Medium", "Hard"],
-        required:true,
+        required:true
     },
     topics:[
         {
-            type:String,
+            type: String,
         }
     ],
-    companies:[
+    companies: [
         {
-            type:String,
+            type: String,
         }
-    ]
+    ],
+    likes:{
+        type:Number,
+        default:0
+    },
+    dislikes:{
+        type:Number,
+        default:0
+    },
+    bookmarks:{
+        type:Number,
+        default:0
+    }
     
 })
-
-module.exports = mongoose.model("Problem", problemSchema)
