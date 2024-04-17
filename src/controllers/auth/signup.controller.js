@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 import { generateOTP } from "@/helper/generateOtp";
 import { sendMail } from '@/helper/sendMail';
 
-
 const signupSchema = z.object({
     fullName: z.string(),
     userName: z.string(),
