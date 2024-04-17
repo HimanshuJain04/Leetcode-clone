@@ -33,5 +33,17 @@ const problemSchema = new mongoose.Schema({
             type:String,
         }
     ],
+    likes:{
+        type:Number,
+        default:0
+    },
+    dislikes:{
+        type:Number,
+        default:0
+    },
+    bookmarks:{
+        type:Number,
+        default:0
+    }
     
 })
