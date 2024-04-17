@@ -5,8 +5,8 @@ export default function Home() {
 
     <div>
 
-        <h1>helllow world </h1>
-        
+        <h1>helllow world dugdiug </h1>
+
     </div>
   );
 }
