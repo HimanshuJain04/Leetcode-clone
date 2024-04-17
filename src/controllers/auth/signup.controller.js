@@ -2,6 +2,7 @@ import { z } from 'zod';
 import User from "@/models/user.model";
 import bcrypt from "bcrypt";
 import { generateOTP } from "@/helper/generateOtp";
+const {v4: uuidv4} = require('uuid');
 
 
 const signupSchema = z.object({
@@ -51,13 +52,12 @@ export const signup = async (req, res) => {
             });
         }
 
+        
+        //uuid generation
+
+        
         // hash the password
         const hashedPass = await bcrypt.hash(password, 10);
-
-        // If everything is okay, send OTP or perform further steps
-
-        const otp = generateOTP();
-
 
         // return success response
         return res.status(200).json({
