@@ -1,39 +1,15 @@
+import mongoose from "mongoose";
 
-const mongoose = require("mongoose");
-export async function connect(){
+export const dbConnection = async () => {
 
-    try{
-
-
-        console.log("database usrl ",process.env.DATABASE_URL);
-
-        let url = "mongodb+srv://leetcode:leetcode@cluster0.wzdfurj.mongodb.net/";
-
-        await mongoose.connect(url);
-        
-        const connection = mongoose.connection;
-        
-        connection.on("connected",()=>  {
-            
-            console.log("connected to the database ");
-
+    mongoose
+        .connect(process.env.DATABASE_URL, {})
+        .then(() => {
+            console.log("Database Conenction successfull!")
         })
-        
-        connection.on("error",(err)=>{
-
-            console.log("connection error",err);
-            
-
-        }) 
-
-    }
-    
-    catch(error){
-
-        console.log("error ocuur whil connectin to the db ",error)
-
-    }
-
-
+        .catch((error) => {
+            console.log("Database Connection failed! : ", error)
+        });
 }
+
 
