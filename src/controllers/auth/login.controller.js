@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 import User from "@/models/user.model";
 import { z } from "zod";
 import {isEmailAlreadyExist, isUserNameAlreadyExist} from "@/helper/isUserExist";
@@ -92,4 +91,3 @@ export const login = async(req,res) =>{
     }
 }
 
->>>>>>> 39dcd538776998224ff59d816a522345e0a19b70

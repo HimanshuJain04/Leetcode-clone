@@ -47,11 +47,10 @@ export const signup = async (req, res) => {
         }
 
         // If email exist  return error response
-<<<<<<< HEAD
-        if (isEmailAlreadyExist(email)) {
-=======
+
+
         if (await isEmailAlreadyExist(email)) {
->>>>>>> 39dcd538776998224ff59d816a522345e0a19b70
+
             return res.status(400).json({
                 message: "Email already registered, Please login to continue",
                 error: "Email already registered, Please login to continue",
