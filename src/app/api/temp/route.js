@@ -9,9 +9,6 @@ export default async function GET() {
 
         console.log("hellow");
 
-        // const newUser = await User.create()
-
-
         return NextResponse.json({
 
 
@@ -27,5 +24,4 @@ export default async function GET() {
 
     }
 }
-
 

@@ -47,7 +47,10 @@ export const signup = async (req, res) => {
         }
 
         // If email exist  return error response
+
+
         if (await isEmailAlreadyExist(email)) {
+
             return res.status(400).json({
                 message: "Email already registered, Please login to continue",
                 error: "Email already registered, Please login to continue",

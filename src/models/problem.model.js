@@ -51,12 +51,22 @@ const problemSchema = new Schema({
         type:Number,
         default:0
     },
+    bookmarks: {
+        type: Number,
+        default: 0
+    },
     testCases:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:"Testcase"
         }
     ],
+
 })
 
+module.exports = mongoose.model("Problem", problemSchema);
+
+
 export default model("Problem", problemSchema);
+
+

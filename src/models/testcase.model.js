@@ -16,4 +16,9 @@ const testcaseSchema = new Schema({
     }
 })
 
+
+module.exports = mongoose.model("Testcase" , testcaseSchema);
+
+
 export default model("Testcase" , testcaseSchema);
+
