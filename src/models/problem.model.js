@@ -6,24 +6,16 @@ const problemSchema = new Schema({
         type: String,
         required: true
     },
-    id:{
-        type:Number,
-        required:true
-    },
-    description:{
-        type:String,
-        required:true
+    description: {
+        type: String,
+        required: true
     },
     questionType: {
         type: String,
         enum: ["Easy", "Medium", "Hard"],
         required: true,
     },
-    title:{
-        type:String,
-        required:true
-    },
-    topics:[
+    topics: [
         {
             type: String,
         }
@@ -64,8 +56,7 @@ const problemSchema = new Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"Testcase"
         }
-    ]
-    
+    ],
 })
 
 export default model("Problem", problemSchema);
