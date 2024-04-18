@@ -1,10 +1,11 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     email: {
         type: String,
         required: true,
         trim: true,
+        unique:true,
 
     },fullName:{
         type:String,
@@ -14,14 +15,15 @@ const userSchema = new mongoose.Schema({
     userName:{
         type:String,
         required:true,
-        trim:true
+        trim:true,
+        unique:true,
     },
     password: {
         type: String,
         required: true,
     },
     additionalDetails: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true,
         ref: "Profile"
     },
@@ -31,21 +33,42 @@ const userSchema = new mongoose.Schema({
     token:{
         type:String,
     },
-    resetPasswordExpires:{
-        type:Date,
-    },
-    verifyUUID:{
-        type:String,
-    },
-    verifyUUIDExpiry:{
+    tokenExpiry:{
         type:Date,
     },
     isverified:{
         type:Boolean,
         default:false,
-    }
+    },
+    solvedProblem:[
+        {
+            problemId:{
+                type: Schema.Types.ObjectId,
+                ref:"Problem",
+            },
+            submissionCount:{
+                type: Number,
+                default:0
+            },
+            submittedAt:{
+                type:Date,
+            }
+        }
+    ],
+    like:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:"Problem"
+        }
+    ],
+    bookmark:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:"Problem"
+        }
+    ]
 })
 
-module.exports = mongoose.model("User", userSchema);
+export default model("User", userSchema);
 
 

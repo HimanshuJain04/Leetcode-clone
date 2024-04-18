@@ -1,8 +1,10 @@
 import { z } from 'zod';
 import User from "@/models/user.model";
 import bcrypt from "bcrypt";
-import { generateOTP } from "@/helper/generateOtp";
 const {v4: uuidv4} = require('uuid');
+import { sendMail } from '@/helper/sendMail';
+require('dotenv').config();
+import {isEmailAlreadyExist, isUserNameAlreadyExist} from "@/helper/isUserExist";
 
 
 const signupSchema = z.object({
@@ -45,7 +47,11 @@ export const signup = async (req, res) => {
         }
 
         // If email exist  return error response
+<<<<<<< HEAD
         if (isEmailAlreadyExist(email)) {
+=======
+        if (await isEmailAlreadyExist(email)) {
+>>>>>>> 39dcd538776998224ff59d816a522345e0a19b70
             return res.status(400).json({
                 message: "Email already registered, Please login to continue",
                 error: "Email already registered, Please login to continue",
@@ -55,7 +61,7 @@ export const signup = async (req, res) => {
         }
 
         // If userName is not unique, return error response
-        if (!isUserNameAlreadyExist(userName)) {
+        if (await isUserNameAlreadyExist(userName)) {
             return res.status(400).json({
                 message: "Username is already taken",
                 error: "Username is already taken",
@@ -69,26 +75,31 @@ export const signup = async (req, res) => {
         const uuid = uuidv4();
         console.log(uuid);
 
+        // hash the password
+        const hashedPass = await bcrypt.hash(password, 10);
+
 
         // create entry in databse
         const user = User.create({
             fullName,
             userName,
             email,
-            password,
-            uuid
+            password: hashedPass,
+            verifyUUID: uuid,
         });
 
 
         //generate link
-        const link = `http://localhost:3000/${uuid}/${user}`
+        const link = `${process.env.NEXT_PUBLIC_BASE_URL}/${uuid}/${user._id}`;
+
+
+        // send mail with verification link
+        await sendMail({
+            body: link,
+            sendTo: email,
+            subject: "verification from leetcode-clone",   
+        })
         
-        // hash the password
-        const hashedPass = await bcrypt.hash(password, 10);
-
-        // If everything is okay, send OTP or perform further steps
-
-        const otp = generateOTP();
 
 
         // return success response

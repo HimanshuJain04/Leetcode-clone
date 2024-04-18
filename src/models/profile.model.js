@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+import { Schema, model } from "mongoose";
 
-const profileSchema = new mongoose.Schema({
+const profileSchema = new Schema({
 
     college: {
         type: String,
@@ -20,11 +20,6 @@ const profileSchema = new mongoose.Schema({
     about: {
         type: String,
     },
-    languages: [
-        {
-            type: String,
-        }
-    ],
     streak:{
         type:Number,
         default:0
@@ -40,4 +35,4 @@ const profileSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model("Profile", profileSchema);
+export default model("Profile", profileSchema);
