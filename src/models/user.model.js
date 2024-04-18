@@ -36,7 +36,7 @@ const userSchema = new Schema({
     tokenExpiry:{
         type:Date,
     },
-    isverified:{
+    isVerified:{
         type:Boolean,
         default:false,
     },
