@@ -12,6 +12,7 @@ const problemSchema = z.object({
     questionType: z.enum(["Easy", "Medium", "Hard"]),
     topics: z.array(z.string()),
     companies: z.array(z.string()),
+    videourl:z.string(),
 });
 
 const PAGE_SIZE = 10;
@@ -181,4 +182,8 @@ export const deleteProblem = async (req, res) => {
 
 //     }
 // }
+
+
+
+
 
