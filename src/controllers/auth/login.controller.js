@@ -41,7 +41,7 @@ export const login = async(req,res) =>{
             })
         }
 
-        // checking if user is signed in
+        // checking if user is signed up
         if(user.isVerified != true){
             return res.status(400).json({
                 success:false,
