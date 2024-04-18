@@ -36,8 +36,13 @@ const problemSchema = new mongoose.Schema({
     bookmarks: {
         type: Number,
         default: 0
+    },
+    videoUrl:{
+
+        type: String,
     }
 
 })
 
 module.exports = mongoose.model("Problem", problemSchema);
+

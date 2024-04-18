@@ -166,3 +166,19 @@ export const deleteProblem = async (req, res) => {
 
 
 // update problem
+
+
+// export const updateProblem = async (req, res) => {
+
+//     try{
+
+//         const{}
+
+//     }catch(error){
+
+
+//         console.log(error);
+
+//     }
+// }
+
