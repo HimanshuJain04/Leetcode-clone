@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema, model } from "mongoose";
 
-const problemSchema = new mongoose.Schema({
+const problemSchema = new Schema({
 
     title: {
         type: String,
@@ -33,19 +33,39 @@ const problemSchema = new mongoose.Schema({
             type: String,
         }
     ],
-    likes:{
+    likes:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        }
+    ],
+    dislikes:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        }
+    ],
+    bookmarks:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        }
+    ],
+    acceptedCount:{
         type:Number,
         default:0
     },
-    dislikes:{
+    submissionCount:{
         type:Number,
         default:0
     },
-    bookmarks:{
-        type:Number,
-        default:0
-    }
+    testCases:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Testcase"
+        }
+    ]
     
 })
 
-module.exports = mongoose.model("Problem", problemSchema);
+export default model("Problem", problemSchema);
